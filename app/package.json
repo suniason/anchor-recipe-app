@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@ant-design/icons": "^5.2.6",
+    "@solana/web3.js": "^1.87.5",
     "antd": "^5.11.1",
     "next": "14.0.2",
     "react": "^18",
