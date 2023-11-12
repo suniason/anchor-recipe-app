@@ -1,6 +1,4 @@
 use anchor_lang::prelude::*;
-use std::mem::size_of;
-
 declare_id!("6xpX3GHGBP7JcEAMuGhhFLxQy16RMESnNjnJteiSHu8X");
 
 #[program]
@@ -26,7 +24,7 @@ pub mod recipe_anchor_app {
 
 #[derive(Accounts)]
 pub struct CreateRecipe<'info> {
-    #[account(init, payer = owner, space =  size_of::<Recipe>() + 8)]
+    #[account(init, payer = owner, space =  1024 )]
     pub recipe : Account<'info, Recipe>,
     #[account(mut)]
     pub owner : Signer<'info>,

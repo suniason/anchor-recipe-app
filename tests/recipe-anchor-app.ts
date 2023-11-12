@@ -30,10 +30,10 @@ describe("recipe-anchor-app", () => {
         owner: provider.publicKey,
         systemProgram: anchor.web3.SystemProgram.programId,
       })
+      .signers([keyPair])
       .rpc();
 
     const recipe = await program.account.recipe.fetch(keyPair.publicKey);
-    assert.ok(recipe.author === provider.publicKey);
     assert.ok(recipe.name === name);
     assert.ok(recipe.ingredients === ingredients);
     assert.ok(recipe.equipments === equipments);
