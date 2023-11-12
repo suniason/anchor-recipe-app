@@ -40,7 +40,7 @@ export const RecipeIdl : RecipeApp =  {
     ],
     accounts: [
       {
-        name: "Recipe",
+        name: "recipe",
         type: {
           kind: "struct",
           fields: [
@@ -65,7 +65,7 @@ export const RecipeIdl : RecipeApp =  {
       }
     ],
     "metadata": {
-      "address": "6xpX3GHGBP7JcEAMuGhhFLxQy16RMESnNjnJteiSHu8X"
+      "address": "BnbRLAnvdutKLxFvtcsT5fCdgeMoV1reHfag2TeEreCA"
     }
   }
 

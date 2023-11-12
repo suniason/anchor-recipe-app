@@ -1,12 +1,10 @@
 import { Button, Input, Modal, message } from 'antd'
 import React, { useState } from 'react'
 import RecipeTag from './tag'
-import { Recipe, RecipeApp } from '@/utils/types'
-import { useRecipeContext } from '@/context/appcontext'
-import { RecipeIdl } from '@/utils/idl'
-import { programid } from '@/utils/constants'
-import { Program } from '@coral-xyz/anchor'
-import { Keypair, PublicKey, SystemProgram, TransactionMessage, VersionedTransaction } from '@solana/web3.js'
+import { Recipe } from '@/utils/types'
+import { Keypair } from '@solana/web3.js'
+import { useAnchorWallet } from '@solana/wallet-adapter-react'
+import createRecipe from '@/utils/fetch'
 
 interface CreateRecipeProps{
     isOpen: boolean
@@ -14,10 +12,11 @@ interface CreateRecipeProps{
 }
 
 
-const CreateRecipeModal:React.FC<CreateRecipeProps> = ({isOpen, setIsOpen}) => {
-    const {wallet, connection} = useRecipeContext()
+const CreateRecipeModal:React.FC<CreateRecipeProps> = ({isOpen, setIsOpen}) => {    
     const {TextArea}= Input
     const [isLoading, setIsLoading] = useState<boolean>(false)
+    const [recipeAccount, _] = useState(Keypair.generate());
+    const wallet = useAnchorWallet();
 
     const [recipe, setRecipe] = useState<Recipe>({
         author: '',
@@ -36,39 +35,32 @@ const CreateRecipeModal:React.FC<CreateRecipeProps> = ({isOpen, setIsOpen}) => {
 
 
       const handleConfirm = async () => {
-        if(wallet==="" || wallet===null){
-            message.error('Wallet not found. Make sure you are connected.')
-            return
-        }
-        setRecipe({...recipe, author: wallet})
-
-        if(connection){
-            const program = new Program<RecipeApp>(
-              RecipeIdl,
-              programid,
-              {connection}
-            )
+        if(wallet){
             try {
-                const keyPair = Keypair.generate()
-                const res =  await program.methods
-                        .createRecipe(recipe.name, recipe.ingredients, recipe.equipments, recipe.procedure)
-                        .accounts({
-                            recipe: keyPair.publicKey,
-                            owner: new PublicKey(recipe.author),
-                            systemProgram: SystemProgram.programId,
-                        }).signers([keyPair])
-                        .rpc()
-                        console.log(res)
-                
-                message.success("Recipe successfully created")
-            } catch (error) {
-                console.log(error)
-                message.error("Cannot create recipe this time :(")
-            }
-        }else{
-            console.log("No connection found")
+                const recipeResult = await createRecipe(
+                    recipe.name,
+                    recipe.ingredients,
+                    recipe.equipments,
+                    recipe.procedure,
+                    wallet,
+                    recipeAccount
+                    );
+                    if (recipeResult) {
+                        console.log(recipeResult)
+                console.log("begin is night")
+
+                    }
+                console.log("end is night")
+
+                } catch (error) {
+                    console.log(error)
+                console.log("error occured")
+
+                }
+                console.log("finished running")
         }
-      }
+        }
+        
 
 return (
     <Modal
@@ -134,7 +126,4 @@ return (
 }
 
 export default CreateRecipeModal
-function getLatestBlockhash() {
-    throw new Error('Function not implemented.')
-}
 

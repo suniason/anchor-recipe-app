@@ -1,5 +1,5 @@
 use anchor_lang::prelude::*;
-declare_id!("6xpX3GHGBP7JcEAMuGhhFLxQy16RMESnNjnJteiSHu8X");
+declare_id!("BnbRLAnvdutKLxFvtcsT5fCdgeMoV1reHfag2TeEreCA");
 
 #[program]
 pub mod recipe_anchor_app {

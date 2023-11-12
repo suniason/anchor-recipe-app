@@ -1,6 +1,6 @@
 import React from 'react';
-import WalletButton from './wallet';
 import { ChildrenProps } from '@/utils/types';
+import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 
 const DefaultLayout:React.FC<ChildrenProps> = ({children}) => {
     
@@ -10,7 +10,7 @@ const DefaultLayout:React.FC<ChildrenProps> = ({children}) => {
     <div className='flex flex-col w-full items-center'>
         <div className='flex w-8/12 justify-end m-5'>
             <div className=''>
-                <WalletButton/>
+                <WalletMultiButton className='bg-primary-500'/>
             </div>
         </div>
     </div>

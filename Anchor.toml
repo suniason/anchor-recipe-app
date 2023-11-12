@@ -5,7 +5,7 @@ seeds = false
 skip-lint = false
 
 [programs.localnet]
-recipe_anchor_app = "6xpX3GHGBP7JcEAMuGhhFLxQy16RMESnNjnJteiSHu8X"
+recipe_anchor_app = "BnbRLAnvdutKLxFvtcsT5fCdgeMoV1reHfag2TeEreCA"
 
 [registry]
 url = "https://api.apr.dev"

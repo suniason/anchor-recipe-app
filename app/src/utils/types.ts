@@ -76,7 +76,7 @@ export type RecipeApp ={
   ],
   "accounts": [
     {
-      "name": "Recipe",
+      "name": "recipe",
       "type": {
         "kind": "struct",
         "fields": [
@@ -105,6 +105,6 @@ export type RecipeApp ={
     }
   ],
   "metadata": {
-    "address": "6xpX3GHGBP7JcEAMuGhhFLxQy16RMESnNjnJteiSHu8X"
+    "address": "BnbRLAnvdutKLxFvtcsT5fCdgeMoV1reHfag2TeEreCA"
   }
 }
