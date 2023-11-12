@@ -6,13 +6,12 @@ import { getAllRecipe } from "@/utils/fetch"
 import { RecipeIdl } from "@/utils/idl"
 import { Recipe, RecipeApp } from "@/utils/types"
 import {useEffect, useState} from 'react'
-import NodeWallet from "@coral-xyz/anchor/dist/cjs/nodewallet.js"
 import { programid } from "@/utils/constants"
 import { Program } from "@coral-xyz/anchor"
 import { Connection, clusterApiUrl } from "@solana/web3.js"
 
 export default function Home() {
-  const {connection, page, wallet, setWallet, setConnected} = useRecipeContext()
+  const {connected, connection, page, wallet, setWallet, setConnected} = useRecipeContext()
   const [recipes, setRecipes] = useState<Recipe[]>([])
   
   useEffect(()=>{
@@ -55,7 +54,10 @@ export default function Home() {
           <div className="text-white w-full">
             <Sidebar/>
           </div>
-            {body}
+            {connected?
+            body
+            :<div className="text-white text-3xl font-bold">Connect to your wallet</div>
+          }
         </div>
     </DefaultLayout>
       </div>

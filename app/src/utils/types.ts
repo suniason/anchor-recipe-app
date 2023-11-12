@@ -1,7 +1,6 @@
 import { Program } from "@coral-xyz/anchor"
 import { Connection, PublicKey } from "@solana/web3.js"
 import { ReactNode } from "react"
-import { PhantomProvider } from "./phantom"
 
 export interface ChildrenProps {
   children: ReactNode

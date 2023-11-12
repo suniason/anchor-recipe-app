@@ -53,6 +53,11 @@ const RecipeTag: React.FC<RecipeTagProp> = ({keyword, placeholder, updateValue})
 
   const tagChild = tags.map(forMap);
 
+  const handleKeyPress = (e:any) => {
+    if (e.key === ',') {
+      e.preventDefault();
+    }
+  }
 
   return (
     <> 
@@ -65,6 +70,7 @@ const RecipeTag: React.FC<RecipeTagProp> = ({keyword, placeholder, updateValue})
             value={inputValue}
             onChange={handleInputChange}
             onBlur={handleInputConfirm}
+            onKeyDown={handleKeyPress}
             />
             <Button size='small'  onClick={handleInputConfirm}>{placeholder}</Button>
         </div>

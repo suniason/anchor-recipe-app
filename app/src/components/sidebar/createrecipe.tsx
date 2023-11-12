@@ -3,10 +3,10 @@ import React, { useState } from 'react'
 import RecipeTag from './tag'
 import { Recipe, RecipeApp } from '@/utils/types'
 import { useRecipeContext } from '@/context/appcontext'
-import { create_recipe } from '@/utils/fetch'
 import { RecipeIdl } from '@/utils/idl'
 import { programid } from '@/utils/constants'
 import { Program } from '@coral-xyz/anchor'
+import { Keypair, PublicKey, SystemProgram, TransactionMessage, VersionedTransaction } from '@solana/web3.js'
 
 interface CreateRecipeProps{
     isOpen: boolean
@@ -40,7 +40,6 @@ const CreateRecipeModal:React.FC<CreateRecipeProps> = ({isOpen, setIsOpen}) => {
             message.error('Wallet not found. Make sure you are connected.')
             return
         }
-
         setRecipe({...recipe, author: wallet})
 
         if(connection){
@@ -50,12 +49,24 @@ const CreateRecipeModal:React.FC<CreateRecipeProps> = ({isOpen, setIsOpen}) => {
               {connection}
             )
             try {
-                await create_recipe(program,recipe.author, recipe.name,recipe.ingredients, recipe.equipments, recipe.procedure)
+                const keyPair = Keypair.generate()
+                const res =  await program.methods
+                        .createRecipe(recipe.name, recipe.ingredients, recipe.equipments, recipe.procedure)
+                        .accounts({
+                            recipe: keyPair.publicKey,
+                            owner: new PublicKey(recipe.author),
+                            systemProgram: SystemProgram.programId,
+                        }).signers([keyPair])
+                        .rpc()
+                        console.log(res)
+                
                 message.success("Recipe successfully created")
             } catch (error) {
+                console.log(error)
                 message.error("Cannot create recipe this time :(")
             }
-
+        }else{
+            console.log("No connection found")
         }
       }
 
@@ -123,3 +134,7 @@ return (
 }
 
 export default CreateRecipeModal
+function getLatestBlockhash() {
+    throw new Error('Function not implemented.')
+}
+
