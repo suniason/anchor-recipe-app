@@ -1,27 +1,31 @@
-import { DefaultLayout, RecipeList, Sidebar } from "@/components"
+import { DefaultLayout, Sidebar } from "@/components"
 import About from "@/components/routes/about"
 import HomePage from "@/components/routes/home"
 import { useRecipeContext } from "@/context/appcontext"
 import { getAllRecipe } from "@/utils/fetch"
-import { Recipe } from "@/utils/types"
 import {useEffect, useState} from 'react'
 import { useAnchorWallet } from "@solana/wallet-adapter-react"
 
 export default function Home() {
-  const {connected, page} = useRecipeContext()
-  const [recipes, setRecipes] = useState<Recipe[]>([])
+  const {isCreating, connected, page} = useRecipeContext()
+  const[recipes, setRecipes] = useState<any>(null)
   const wallet = useAnchorWallet();
-  useEffect(()=>{
-    console.log("initialize")
-  },[wallet])
 
   useEffect(() => {
     if(wallet){
-      console.log(wallet)
-      const recipeAccounts = getAllRecipe(wallet)
-      console.log(recipeAccounts)
+      getAllRecipe(wallet).then((data:any) => {
+        setRecipes(data);
+      });
     }
-  }, [wallet]);
+  }, []);
+
+  useEffect(() => {
+    if(!isCreating && wallet){
+      getAllRecipe(wallet).then((data:any) => {
+        setRecipes(data);
+      });
+    }
+  }, [isCreating, wallet]);
 
   
     let body = null
@@ -30,18 +34,16 @@ export default function Home() {
 
   return (
     <div className='text-text flex flex-col items-center'>
-        <DefaultLayout>
-
+        <DefaultLayout/>
         <div className="grid grid-cols-[25%_75%] w-full md:w-9/12">
           <div className="text-white w-full">
             <Sidebar/>
           </div>
-            {connected?
+            {wallet?
             body
             :<div className="text-white text-3xl font-bold">Connect to your wallet</div>
           }
         </div>
-    </DefaultLayout>
       </div>
   )
 }

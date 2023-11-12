@@ -24,7 +24,7 @@ pub mod recipe_anchor_app {
 
 #[derive(Accounts)]
 pub struct CreateRecipe<'info> {
-    #[account(init, payer = owner, space =  1024 )]
+    #[account(init, payer = owner, space =  2048 )]
     pub recipe : Account<'info, Recipe>,
     #[account(mut)]
     pub owner : Signer<'info>,

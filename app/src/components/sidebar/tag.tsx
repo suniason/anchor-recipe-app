@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 import type { InputRef } from 'antd';
-import { Button, Input, Tag, theme } from 'antd';
+import { Button, Input, Tag, message, theme } from 'antd';
 
 interface RecipeTagProp{
     keyword: string
@@ -20,8 +20,11 @@ const RecipeTag: React.FC<RecipeTagProp> = ({keyword, placeholder, updateValue})
     setTags(newTags);
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
+  const handleInputChange = (e:any) => {
+    const originalValue = e.target.value
+    const sanitizedValue = originalValue.replace(/[,.!"]/g, '');
+    if(originalValue!==sanitizedValue) message.error(`This input field excludes ( , . ! ")`)
+    setInputValue(sanitizedValue);
   };
 
   const handleInputConfirm = () => {

@@ -7,18 +7,16 @@ export interface ChildrenProps {
 }
 
 export interface AppContextType {
-  wallet: string
   page: number
   connected: boolean
-  connection: Connection|null
-  setWallet: React.Dispatch<React.SetStateAction<string>>
+  isCreating: boolean
   setPage: React.Dispatch<React.SetStateAction<number>>
   setConnected: React.Dispatch<React.SetStateAction<boolean>>
-  setConnection: React.Dispatch<React.SetStateAction<Connection|null>>
+  setIsCreating: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export interface Posts{
-  recipes: Recipe[]
+  recipes: any
 }
 
 export interface Recipe{

@@ -5,6 +5,7 @@ import { Recipe } from '@/utils/types'
 import { Keypair } from '@solana/web3.js'
 import { useAnchorWallet } from '@solana/wallet-adapter-react'
 import createRecipe from '@/utils/fetch'
+import { useRecipeContext } from '@/context/appcontext'
 
 interface CreateRecipeProps{
     isOpen: boolean
@@ -14,9 +15,9 @@ interface CreateRecipeProps{
 
 const CreateRecipeModal:React.FC<CreateRecipeProps> = ({isOpen, setIsOpen}) => {    
     const {TextArea}= Input
-    const [isLoading, setIsLoading] = useState<boolean>(false)
     const [recipeAccount, _] = useState(Keypair.generate());
     const wallet = useAnchorWallet();
+    const {isCreating,setIsCreating} = useRecipeContext()
 
     const [recipe, setRecipe] = useState<Recipe>({
         author: '',
@@ -37,6 +38,7 @@ const CreateRecipeModal:React.FC<CreateRecipeProps> = ({isOpen, setIsOpen}) => {
       const handleConfirm = async () => {
         if(wallet){
             try {
+                setIsCreating(true)
                 const recipeResult = await createRecipe(
                     recipe.name,
                     recipe.ingredients,
@@ -44,24 +46,18 @@ const CreateRecipeModal:React.FC<CreateRecipeProps> = ({isOpen, setIsOpen}) => {
                     recipe.procedure,
                     wallet,
                     recipeAccount
-                    );
+                    )
                     if (recipeResult) {
-                        console.log(recipeResult)
-                console.log("begin is night")
-
+                        message.success("Successfully created recipe")
                     }
-                console.log("end is night")
-
                 } catch (error) {
                     console.log(error)
-                console.log("error occured")
-
                 }
-                console.log("finished running")
-        }
+                setIsCreating(false)
+                
+            }
         }
         
-
 return (
     <Modal
         width={800}
@@ -72,7 +68,7 @@ return (
             <Button key="back" onClick={()=>setIsOpen(false)}>
                 Return
             </Button>, 
-            <Button className='bg-primary-700' key="cofirm" onClick={handleConfirm} loading={isLoading}>
+            <Button className='bg-primary-700' key="cofirm" onClick={handleConfirm} loading={isCreating}>
                 Confirm
         </Button>, 
         ]}

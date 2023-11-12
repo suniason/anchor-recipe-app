@@ -1,4 +1,4 @@
-import { IProgram, Recipe, RecipeApp} from "./types";
+import { RecipeApp} from "./types";
 import { Program, AnchorProvider, web3 } from "@project-serum/anchor";
 import { AnchorWallet } from "@solana/wallet-adapter-react";
 import { RecipeIdl } from "./idl";
@@ -57,7 +57,7 @@ export default async function createRecipe(
       recipeAccount.publicKey
     );
     console.log("res",reciperesult)
-    console.log("Recipe: ", recipe);
+    console.log("Recipe: ", name, ingredients, equipments, procedure);
     return recipe;
   } catch (err) {
     console.log("Transaction error: ", err);

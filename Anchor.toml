@@ -7,6 +7,9 @@ skip-lint = false
 [programs.localnet]
 recipe_anchor_app = "BnbRLAnvdutKLxFvtcsT5fCdgeMoV1reHfag2TeEreCA"
 
+[programs.devnet]
+recipe_anchor_app = "BnbRLAnvdutKLxFvtcsT5fCdgeMoV1reHfag2TeEreCA"
+
 [registry]
 url = "https://api.apr.dev"
 
