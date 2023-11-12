@@ -2,7 +2,7 @@ import { RecipeApp } from "./types";
 
 export const RecipeIdl : RecipeApp =  {
     version: "0.1.0",
-    name: "anchor_recipe_app",
+    name: "recipe_anchor_app",
     instructions: [
       {
         name: "createRecipe",
@@ -10,7 +10,7 @@ export const RecipeIdl : RecipeApp =  {
           {
             name: "recipe",
             isMut: true,
-            isSigner: false,
+            isSigner: true,
           },{
             name: "owner",
             isMut: true,
@@ -40,12 +40,12 @@ export const RecipeIdl : RecipeApp =  {
     ],
     accounts: [
       {
-        name: "recipe",
+        name: "Recipe",
         type: {
           kind: "struct",
           fields: [
             {
-              name: "firstName",
+              name: "author",
               type: "publicKey"
             },{
               name: "name",
@@ -63,6 +63,9 @@ export const RecipeIdl : RecipeApp =  {
           ]
         }
       }
-    ]
+    ],
+    "metadata": {
+      "address": "6xpX3GHGBP7JcEAMuGhhFLxQy16RMESnNjnJteiSHu8X"
+    }
   }
 

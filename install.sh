@@ -12,7 +12,7 @@ npm install
 npm install -g tsx ts-node
 
 # Run this commands after
-export PATH="/home/codespace/.local/share/solana/install/active_release/bin:$PATH"
+PATH="/home/codespace/.local/share/solana/install/active_release/bin:$PATH"
 source "$HOME/.cargo/env"
 
 cargo install --git https://github.com/coral-xyz/anchor avm --locked --force

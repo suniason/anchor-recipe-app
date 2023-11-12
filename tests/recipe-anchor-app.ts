@@ -24,13 +24,12 @@ describe("recipe-anchor-app", () => {
     `;
 
     await program.methods
-      .createRecipe(provider.publicKey, name, ingredients, equipments, procedure)
+      .createRecipe( name, ingredients, equipments, procedure)
       .accounts({
         recipe: keyPair.publicKey,
         owner: provider.publicKey,
         systemProgram: anchor.web3.SystemProgram.programId,
       })
-      .signers([keyPair])
       .rpc();
 
     const recipe = await program.account.recipe.fetch(keyPair.publicKey);
@@ -41,4 +40,4 @@ describe("recipe-anchor-app", () => {
     assert.ok(recipe.procedure === procedure);
   });
 
-}
+})
