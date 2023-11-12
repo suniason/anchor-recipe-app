@@ -48,10 +48,12 @@ const CreateRecipeModal:React.FC<CreateRecipeProps> = ({isOpen, setIsOpen}) => {
                     recipeAccount
                     )
                     if (recipeResult) {
-                        message.success("Successfully created recipe")
+                        message.success("Successfully created recipe.")
+                        setIsOpen(false)
                     }
                 } catch (error) {
                     console.log(error)
+                    message.error("An error has occured. Try again later.")
                 }
                 setIsCreating(false)
                 

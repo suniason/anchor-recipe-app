@@ -6,10 +6,8 @@ export interface ChildrenProps {
 
 export interface AppContextType {
   page: number
-  connected: boolean
   isCreating: boolean
   setPage: React.Dispatch<React.SetStateAction<number>>
-  setConnected: React.Dispatch<React.SetStateAction<boolean>>
   setIsCreating: React.Dispatch<React.SetStateAction<boolean>>
 }
 

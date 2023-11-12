@@ -7,7 +7,7 @@ import {useEffect, useState} from 'react'
 import { useAnchorWallet } from "@solana/wallet-adapter-react"
 
 export default function Home() {
-  const {isCreating, connected, page} = useRecipeContext()
+  const {isCreating, page} = useRecipeContext()
   const[recipes, setRecipes] = useState<any>(null)
   const wallet = useAnchorWallet();
 
@@ -17,7 +17,7 @@ export default function Home() {
         setRecipes(data);
       });
     }
-  }, []);
+  }, [wallet]);
 
   useEffect(() => {
     if(!isCreating && wallet){

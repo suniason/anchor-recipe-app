@@ -5,12 +5,11 @@ const RecipeContext = createContext<AppContextType | undefined>(undefined)
 
 export const RecipeProvider: React.FC<ChildrenProps> = ({ children }) => {
   const [page, setPage] = useState<number>(0)
-  const [connected, setConnected] = useState<boolean>(false)
   const [isCreating, setIsCreating] = useState<boolean>(false)
   
   return (
     <RecipeContext.Provider 
-      value={{  page, connected, isCreating, setPage, setConnected, setIsCreating }}>
+      value={{  page, isCreating, setPage, setIsCreating }}>
       {children}
     </RecipeContext.Provider>
 
