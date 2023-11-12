@@ -16,12 +16,21 @@ const About:React.FC = () => {
                 </ul>
                 <div className='text-lg font-semibold my-2'>Features to be Implemented in the Future</div>
                 <ul className='m-2'>
-                    <li className=''>- Able to create new recipe with image</li>
+                    <li className=''>- Able to create new recipe with image(if possible)</li>
                     <li className=''>- Able to save recipes to favorites</li>
-                    <li className=''>- Able to gain sol if owned recipe is saved</li>
+                    <li className=''>- Able to gain sol if owned recipe is saved by another user</li>
                     <li className=''>- Can edit recipes</li>
                     <li className=''>- Can delete recipes</li>
                 </ul>
+                <div className='text-[#ED1D24]'>
+                <div className='text-lg font-semibold my-2'>Bugs to fix and improvements</div>
+                    <ul className='m-2'>
+                        <li className=''>- Sudden disappearance of items</li>
+                        <li className=''>- Not fixed order of data</li>
+                        <li className=''>- Needs to reload to see output for creating recipe</li>
+                        <li className=''>- Better design</li>
+                    </ul>
+                </div>
             </article>
         </div>
     )
