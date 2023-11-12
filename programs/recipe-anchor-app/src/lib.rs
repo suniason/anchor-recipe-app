@@ -14,7 +14,7 @@ pub mod recipe_anchor_app {
         procedure: String) -> Result<()> {
 
         let recipe_account = &mut ctx.accounts.recipe;
-        recipe_account.author = ctx.accounts.signer.key();
+        recipe_account.author = ctx.accounts.owner.key();
         recipe_account.name = name;
         recipe_account.ingredients = ingredients;
         recipe_account.equipments = equipments;
@@ -26,7 +26,7 @@ pub mod recipe_anchor_app {
 
 #[derive(Accounts)]
 pub struct CreateRecipe<'info> {
-    #[account(init, payer = owner, space =  size_of::<Recipe>() + 256)]
+    #[account(init, payer = owner, space =  size_of::<Recipe>() + 8)]
     pub recipe : Account<'info, Recipe>,
     #[account(mut)]
     pub owner : Signer<'info>,

@@ -1,43 +1,63 @@
-import { Button, Input, Modal } from 'antd'
+import { Button, Input, Modal, message } from 'antd'
 import React, { useState } from 'react'
 import RecipeTag from './tag'
+import { Recipe, RecipeApp } from '@/utils/types'
+import { useRecipeContext } from '@/context/appcontext'
+import { create_recipe } from '@/utils/fetch'
+import { RecipeIdl } from '@/utils/idl'
+import { programid } from '@/utils/constants'
+import { Program } from '@coral-xyz/anchor'
 
 interface CreateRecipeProps{
     isOpen: boolean
     setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-interface RecipeProps{
-    solanaid: string
-    name: string
-    ingredients: string[]
-    equipments: string[]
-    procedure: string
-}
-
 
 const CreateRecipeModal:React.FC<CreateRecipeProps> = ({isOpen, setIsOpen}) => {
-
+    const {wallet, connection} = useRecipeContext()
     const {TextArea}= Input
+    const [isLoading, setIsLoading] = useState<boolean>(false)
 
-    const [recipe, setRecipe] = useState<RecipeProps>({
-        solanaid: '',
+    const [recipe, setRecipe] = useState<Recipe>({
+        author: '',
         name: '',
-        ingredients: [],
-        equipments: [],
+        ingredients: '',
+        equipments: '',
         procedure: ''
     })
 
-    const updateValue = (keyword: string, value: string[]) => {
+    const updateValue = (keyword: string, value: string) => {
         setRecipe((prevContent) => ({
           ...prevContent,
           [keyword]: value,
         }));
       };
 
-    const show = () => {
-        console.log(recipe)
-    }
+
+      const handleConfirm = async () => {
+        if(wallet==="" || wallet===null){
+            message.error('Wallet not found. Make sure you are connected.')
+            return
+        }
+
+        setRecipe({...recipe, author: wallet})
+
+        if(connection){
+            const program = new Program<RecipeApp>(
+              RecipeIdl,
+              programid,
+              {connection}
+            )
+            try {
+                await create_recipe(program,recipe.author, recipe.name,recipe.ingredients, recipe.equipments, recipe.procedure)
+                message.success("Recipe successfully created")
+            } catch (error) {
+                message.error("Cannot create recipe this time :(")
+            }
+
+        }
+      }
 
 return (
     <Modal
@@ -49,7 +69,7 @@ return (
             <Button key="back" onClick={()=>setIsOpen(false)}>
                 Return
             </Button>, 
-            <Button className='bg-primary-700' key="cofirm" onClick={()=>setIsOpen(false)}>
+            <Button className='bg-primary-700' key="cofirm" onClick={handleConfirm} loading={isLoading}>
                 Confirm
         </Button>, 
         ]}

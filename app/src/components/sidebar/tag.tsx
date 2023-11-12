@@ -6,7 +6,7 @@ import { Button, Input, Tag, theme } from 'antd';
 interface RecipeTagProp{
     keyword: string
     placeholder: string
-    updateValue: (keyword: string, value: string[]) => void;
+    updateValue: (keyword: string, value: string) => void;
 }
 
 const RecipeTag: React.FC<RecipeTagProp> = ({keyword, placeholder, updateValue}) => {
@@ -28,7 +28,7 @@ const RecipeTag: React.FC<RecipeTagProp> = ({keyword, placeholder, updateValue})
     if (inputValue && tags.indexOf(inputValue) === -1) {
       setTags([...tags, inputValue]);
     }
-    updateValue(keyword, tags)
+    updateValue(keyword, tags.join(','))
     setInputValue('');
   };
 

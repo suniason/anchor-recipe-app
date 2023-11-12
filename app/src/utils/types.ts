@@ -1,6 +1,7 @@
 import { Program } from "@coral-xyz/anchor"
-import { PublicKey } from "@solana/web3.js"
+import { Connection, PublicKey } from "@solana/web3.js"
 import { ReactNode } from "react"
+import { PhantomProvider } from "./phantom"
 
 export interface ChildrenProps {
   children: ReactNode
@@ -9,16 +10,17 @@ export interface ChildrenProps {
 export interface AppContextType {
   wallet: string
   page: number
-  programId: PublicKey
+  connected: boolean
+  connection: Connection|null
   setWallet: React.Dispatch<React.SetStateAction<string>>
   setPage: React.Dispatch<React.SetStateAction<number>>
-  setProgramId: React.Dispatch<React.SetStateAction<PublicKey>>
+  setConnected: React.Dispatch<React.SetStateAction<boolean>>
+  setConnection: React.Dispatch<React.SetStateAction<Connection|null>>
 }
 
-export interface AppState {
-    wallet: string
-    page: number
-  }
+export interface Posts{
+  recipes: Recipe[]
+}
 
 export interface Recipe{
     author : string

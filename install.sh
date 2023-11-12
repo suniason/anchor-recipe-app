@@ -19,3 +19,8 @@ cargo install --git https://github.com/coral-xyz/anchor avm --locked --force
 # Try this command to check
 # solana --version
 # cargo --version
+
+cd app
+npm i
+
+cd ..
