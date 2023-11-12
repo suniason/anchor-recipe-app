@@ -1,5 +1,4 @@
 import React from 'react';
-import { ChildrenProps } from '@/utils/types';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 
 const DefaultLayout:React.FC = () => {

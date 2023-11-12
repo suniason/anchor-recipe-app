@@ -1,5 +1,3 @@
-import { Program } from "@coral-xyz/anchor"
-import { Connection, PublicKey } from "@solana/web3.js"
 import { ReactNode } from "react"
 
 export interface ChildrenProps {
@@ -26,8 +24,6 @@ export interface Recipe{
     equipments : string
     procedure : string
 }
-
-export type IProgram = Program<RecipeApp>;
 
 export type RecipeApp ={
   "version": "0.1.0",
