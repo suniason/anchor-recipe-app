@@ -41,7 +41,7 @@ export default function Home() {
           </div>
             {wallet?
             body
-            :<div className="text-white text-3xl font-bold">Connect to your wallet</div>
+            :<div className="text-white text-3xl font-bold">Connect to your wallet (Devnet)</div>
           }
         </div>
       </div>

@@ -1,5 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { PlusOutlined } from '@ant-design/icons';
+import React, { useRef, useState } from 'react';
 import type { InputRef } from 'antd';
 import { Button, Input, Tag, message, theme } from 'antd';
 
@@ -21,10 +20,9 @@ const RecipeTag: React.FC<RecipeTagProp> = ({keyword, placeholder, updateValue})
   };
 
   const handleInputChange = (e:any) => {
-    const originalValue = e.target.value
-    const sanitizedValue = originalValue.replace(/[,.!"]/g, '');
-    if(originalValue!==sanitizedValue) message.error(`This input field excludes ( , . ! ")`)
+    const sanitizedValue = e.target.value.replace(/[,.!"]/g, '');
     setInputValue(sanitizedValue);
+    if(e.target.value!==sanitizedValue) message.error(`This input field excludes ( , . ! ")`)
   };
 
   const handleInputConfirm = () => {

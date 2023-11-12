@@ -28,6 +28,7 @@ const About:React.FC = () => {
                         <li className=''>- Sudden disappearance of items</li>
                         <li className=''>- Not fixed order of data</li>
                         <li className=''>- Needs to reload to see output for creating recipe</li>
+                        <li className=''>- Sometimes the ingredients/equipments entered are not stored</li>
                         <li className=''>- Better design</li>
                     </ul>
                 </div>
