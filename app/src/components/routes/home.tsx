@@ -3,12 +3,11 @@ import React, { useState } from 'react'
 import { RecipeList } from '..'
 
 const HomePage:React.FC<Posts> = ({recipes}) => {
-    const [recipeList, _] = useState<any[]>(recipes)
 
     return (
         <>
             <div className="flex flex-col gap-5">
-            {recipeList && recipeList.map((val, key)=>(
+            {recipes && recipes.map((val:any, key:any)=>(
               <RecipeList key={key} 
               author={val.account.author} 
               name={val.account.name} 

@@ -12,12 +12,17 @@ export default function Home() {
   const wallet = useAnchorWallet();
 
   useEffect(() => {
-    if(wallet){
-      getAllRecipe(wallet).then((data:any) => {
-        setRecipes(data);
-      });
-    }
-  }, [wallet]);
+    console.log("The outer data loaded", wallet)
+      if(wallet){
+        console.log("The inner data loaded")
+          getAllRecipe(wallet).then((data:any) => {
+            setRecipes(data)
+            console.log(data)
+          })
+        console.log("Recipes", recipes)
+      }
+    
+  }, [wallet])
 
   useEffect(() => {
     if(!isCreating && wallet){

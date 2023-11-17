@@ -20,6 +20,7 @@ const RecipeTag: React.FC<RecipeTagProp> = ({keyword, placeholder, updateValue})
   };
 
   const handleInputChange = (e:any) => {
+    e.preventDefault()
     const sanitizedValue = e.target.value.replace(/[,.!"]/g, '');
     setInputValue(sanitizedValue);
     if(e.target.value!==sanitizedValue) message.error(`This input field excludes ( , . ! ")`)
