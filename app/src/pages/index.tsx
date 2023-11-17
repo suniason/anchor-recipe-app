@@ -5,23 +5,22 @@ import { useRecipeContext } from "@/context/appcontext"
 import { getAllRecipe } from "@/utils/fetch"
 import {useEffect, useState} from 'react'
 import { useAnchorWallet } from "@solana/wallet-adapter-react"
+import { Spin } from "antd"
 
 export default function Home() {
   const {isCreating, page} = useRecipeContext()
-  const[recipes, setRecipes] = useState<any>(null)
+  const[recipes, setRecipes] = useState<any>()
+  const[isLoading, setIsLoading] = useState<boolean>(false)
   const wallet = useAnchorWallet();
 
   useEffect(() => {
-    console.log("The outer data loaded", wallet)
+    setIsLoading(true)
       if(wallet){
-        console.log("The inner data loaded")
           getAllRecipe(wallet).then((data:any) => {
             setRecipes(data)
-            console.log(data)
           })
-        console.log("Recipes", recipes)
-      }
-    
+        }
+        setIsLoading(false)
   }, [wallet])
 
   useEffect(() => {
@@ -31,6 +30,9 @@ export default function Home() {
       });
     }
   }, [isCreating, wallet]);
+
+  useEffect(()=>{
+  },[recipes])
 
   
     let body = null
@@ -45,7 +47,7 @@ export default function Home() {
             <Sidebar/>
           </div>
             {wallet?
-            body
+             isLoading? <Spin/> : body
             :<div className="text-white text-3xl font-bold">Connect to your wallet (Devnet)</div>
           }
         </div>

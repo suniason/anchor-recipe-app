@@ -24,12 +24,14 @@ const RecipeTag: React.FC<RecipeTagProp> = ({keyword, placeholder, updateValue})
     const sanitizedValue = e.target.value.replace(/[,.!"]/g, '');
     setInputValue(sanitizedValue);
     if(e.target.value!==sanitizedValue) message.error(`This input field excludes ( , . ! ")`)
+    console.log(inputValue)
   };
 
   const handleInputConfirm = () => {
     if (inputValue && tags.indexOf(inputValue) === -1) {
       setTags([...tags, inputValue]);
     }
+    console.log(tags.join(','))
     updateValue(keyword, tags.join(','))
     setInputValue('');
   };

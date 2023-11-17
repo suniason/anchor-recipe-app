@@ -21,6 +21,7 @@ const About:React.FC = () => {
                     <li className=''>- Able to gain sol if owned recipe is saved by another user</li>
                     <li className=''>- Can edit recipes</li>
                     <li className=''>- Can delete recipes</li>
+                    <li className=''>- Add date for easier sorting</li>
                 </ul>
                 <div className='text-[#ED1D24]'>
                 <div className='text-lg font-semibold my-2'>Bugs to fix and improvements</div>
