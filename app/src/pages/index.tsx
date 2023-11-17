@@ -14,13 +14,14 @@ export default function Home() {
   const wallet = useAnchorWallet();
 
   useEffect(() => {
-    setIsLoading(true)
-      if(wallet){
+    if(wallet){
+      setIsLoading(true)
           getAllRecipe(wallet).then((data:any) => {
             setRecipes(data)
-          })
+          }).finally(() => {
+            setIsLoading(false);
+          });
         }
-        setIsLoading(false)
   }, [wallet])
 
   useEffect(() => {
@@ -31,12 +32,11 @@ export default function Home() {
     }
   }, [isCreating, wallet]);
 
-  useEffect(()=>{
-  },[recipes])
+  useEffect(()=>{},[recipes])
 
   
     let body = null
-    if(page===0) body = <HomePage recipes={recipes}/>
+    if(page===0) body = isLoading ? <Spin/> : <HomePage recipes={recipes}/>
     else if(page===1) body = <About/>
 
   return (
@@ -47,7 +47,7 @@ export default function Home() {
             <Sidebar/>
           </div>
             {wallet?
-             isLoading? <Spin/> : body
+             body
             :<div className="text-white text-3xl font-bold">Connect to your wallet (Devnet)</div>
           }
         </div>
