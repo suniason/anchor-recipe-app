@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import { RecipeList } from '..'
 
 const HomePage:React.FC<Posts> = ({recipes}) => {
-    console.log(recipes)
     return (
         <>
             <div className="flex flex-col gap-5">
