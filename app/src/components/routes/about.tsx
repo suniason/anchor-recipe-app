@@ -21,8 +21,17 @@ const About:React.FC = () => {
                     <li className=''>- Able to gain sol if owned recipe is saved by another user</li>
                     <li className=''>- Can edit recipes</li>
                     <li className=''>- Can delete recipes</li>
-                    <li className=''>- Add date for easier sorting</li>
                 </ul>
+                <div className='text-[#ED1D24]'>
+                <div className='text-lg font-semibold my-2'>Bugs to fix and improvements</div>
+                    <ul className='m-2'>
+                        <li className=''>- Not fixed order of data</li>
+                        <li className=''>- Better design</li>
+                        <li className='text-[#aaaaaa]'>- Sudden disappearance of items (Fixed)</li>
+                        <li className='text-[#aaaaaa]'>- Needs to reload to see output for creating recipe (Fixed)</li>
+                        <li className='text-[#aaaaaa]'>- Sometimes the ingredients/equipments entered are not stored (Fixed)</li>
+                    </ul>
+                </div>
             </article>
         </div>
     )
