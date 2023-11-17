@@ -26,9 +26,12 @@ export default function Home() {
 
   useEffect(() => {
     if(!isCreating && wallet){
+      setIsLoading(true)
       getAllRecipe(wallet).then((data:any) => {
         setRecipes(data);
-      });
+      }).finally(() => {
+        setIsLoading(false);
+      })
     }
   }, [isCreating, wallet]);
 

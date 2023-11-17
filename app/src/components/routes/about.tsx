@@ -23,15 +23,6 @@ const About:React.FC = () => {
                     <li className=''>- Can delete recipes</li>
                     <li className=''>- Add date for easier sorting</li>
                 </ul>
-                <div className='text-[#ED1D24]'>
-                <div className='text-lg font-semibold my-2'>Bugs to fix and improvements</div>
-                    <ul className='m-2'>
-                        <li className=''>- Not fixed order of data</li>
-                        <li className=''>- Needs to reload to see output for creating recipe</li>
-                        <li className=''>- Sometimes the ingredients/equipments entered are not stored</li>
-                        <li className=''>- Better design</li>
-                    </ul>
-                </div>
             </article>
         </div>
     )

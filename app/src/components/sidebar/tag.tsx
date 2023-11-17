@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import type { InputRef } from 'antd';
-import { Button, Input, Tag, message, theme } from 'antd';
+import { Button, Input, Tag, message } from 'antd';
 
 interface RecipeTagProp{
     keyword: string
@@ -15,7 +15,6 @@ const RecipeTag: React.FC<RecipeTagProp> = ({keyword, placeholder, updateValue})
 
   const handleClose = (removedTag: string) => {
     const newTags = tags.filter((tag) => tag !== removedTag);
-    console.log(newTags);
     setTags(newTags);
   };
 
@@ -24,15 +23,16 @@ const RecipeTag: React.FC<RecipeTagProp> = ({keyword, placeholder, updateValue})
     const sanitizedValue = e.target.value.replace(/[,.!"]/g, '');
     setInputValue(sanitizedValue);
     if(e.target.value!==sanitizedValue) message.error(`This input field excludes ( , . ! ")`)
-    console.log(inputValue)
   };
 
   const handleInputConfirm = () => {
     if (inputValue && tags.indexOf(inputValue) === -1) {
-      setTags([...tags, inputValue]);
+      setTags((prevTags) => {
+        const newTags = [...prevTags, inputValue];
+        updateValue(keyword, newTags.join(','));
+        return newTags;
+      });
     }
-    console.log(tags.join(','))
-    updateValue(keyword, tags.join(','))
     setInputValue('');
   };
 
@@ -58,8 +58,11 @@ const RecipeTag: React.FC<RecipeTagProp> = ({keyword, placeholder, updateValue})
   const tagChild = tags.map(forMap);
 
   const handleKeyPress = (e:any) => {
-    if (e.key === ',') {
+    if (e.key === ',' || e.key === 'Tab') {
       e.preventDefault();
+    }
+    if (e.key === 'Enter') {
+      handleInputConfirm()
     }
   }
 
@@ -73,7 +76,6 @@ const RecipeTag: React.FC<RecipeTagProp> = ({keyword, placeholder, updateValue})
             type="text"
             value={inputValue}
             onChange={handleInputChange}
-            onBlur={handleInputConfirm}
             onKeyDown={handleKeyPress}
             />
             <Button size='small'  onClick={handleInputConfirm}>{placeholder}</Button>

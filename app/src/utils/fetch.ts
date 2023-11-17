@@ -56,11 +56,9 @@ export default async function createRecipe(
     const reciperesult = await program.account.recipe.fetch(
       recipeAccount.publicKey
     );
-    console.log("res",reciperesult)
-    console.log("Recipe: ", name, ingredients, equipments, procedure);
     return recipe;
   } catch (err) {
-    console.log("Transaction error: ", err);
+    console.error("Transaction error: ", err);
     return;
   }
 }
