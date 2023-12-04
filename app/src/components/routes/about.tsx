@@ -1,11 +1,17 @@
+import { Image } from 'antd'
 import React from 'react'
 
 const About:React.FC = () => {
     return (
         <div className='p-2 text-white'>
             <header className='text-2xl font-bold my-2'>About this App</header>
+                <div className='w-full flex justify-center'>
+                    <div className='w-4/12'>
+                    <Image src='gourmetquest_logo.png' preview={false}/>
+                    </div>
+                </div>
             <article className='text-xl my-1'>
-            Introducing our innovative decentralized application (DApp) built on the Solana blockchain, designed to revolutionize the way people share and discover recipes. Our Solana Recipe Sharing DApp is a cutting-edge platform that brings together food enthusiasts, home chefs, and culinary experts from around the world in a secure, efficient, and decentralized ecosystem.
+            Introducing our innovative decentralized application (DApp) built on the Solana blockchain, designed to revolutionize the way people share and discover recipes. Gourmet Quest is a cutting-edge platform that brings together food enthusiasts, home chefs, and culinary experts from around the world in a secure, efficient, and decentralized ecosystem.
             </article>
             <article className=''>
                 <div className='text-lg font-semibold my-2'>Available Features</div>
